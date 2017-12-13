@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <meta name="description" content="">
+        <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                font-family: Helvetica, Arial;
+            }
+
+            .query {
+                width: 25%;
+                margin-bottom: 5px;
+                padding: 5px;
+                font-size: 16px;
+            }
+
+            .search {
+                padding: 8px 20px;
+                font-size: 16px;
+                background-color: rgba(57, 172, 115, .8);
+                color: #fff;
+                position: absolute;
+                z-index: 1;
+            }
+
+            .search:hover {
+                padding: 14px 26px;
+                background-color: rgba(140, 217, 177, .6)
+
+            }
+
+            .map_area {
+                margin: auto;
+                width: 80%;
+
+
+            }
+            .google_map {
+               height: 600px;
+               width: 100%;
+               margin: auto;
+
+            }
+            .drop_list_box {
+                box-sizing: border-box;
+                background-color: rgba(255,255,255,.5);
+                position: absolute;
+                display: none;
+                overflow: auto;
+                z-index: 1;
+
+
+                }
+            .drop_list {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+            }
+
+            .dropdown {
+
+              font-size: 14px;
+              margin-top: 2px;
+              width: 100%;
+              padding: 6px;
+              border: none;
+              text-align: left;
+              background-color: rgba(255,255,255,.3);
+
+            }
+
+            .dropdown:hover {
+              background-color: rgba(57, 172, 115, .5)
+
+            }
+
+            a:hover {
+                color: rgb(255,255,255);
+            }
+
+            .show {
+                display:block;
+            }
+
+            a {
+                text-decoration: none;
+                font-size: 16px;
+                color: rgba(57, 172, 115, .8)
+            }
+        </style>
+    </head>
+    <body>
+
+        <header>
+            <figure class="med-logo">Intucompass</figure>
+            <nav>
+                <ul>
+                    <li>Thoughts</li>
+                    <li>Profile</li>
+                    <li>Sign In</li>
+                    <li>Join</li>
+                </ul>
+            </nav>
+
+            <input id="query" class="query" type="text">
+            <button id="search" class="search" type="submit">Find it!</button>
+            <div id='drop_list' class="drop_list_box">
+              <ul id='ul' class='drop_list'></ul>
+            </div>
+            <script>
+
+
+            </script>
+
+        </header>
+
+        <main>
+
+
+            <div class="map_area">
+                <figure class="google_map" id="map">
+                    <script>
+                      function initMap() {
+                        var pdx = {lat: 45.52306220000001, lng: -122.6764815};
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                          zoom: 10,
+                          center: pdx,
+                        });
+//                        var marker = new google.maps.Marker({
+//                          position: uluru,
+//                          map: map
+//                        });
+                      }
+                    </script>
+                </figure>
+
+            </div>
+
+            <aside class="thought_feed">
+                <div class="bubble one"></div>
+                <div class="bubble two"></div>
+                <div class="bubble three"></div>
+                <div class="bubble four"></div>
+
+            </aside>
+        </main>
+        <!--<script src="apikey.js"></script>-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG8RCrC_9q0rXFQM334O78Pz_pFPsWL7E&callback=initMap">
+    </script>
+    <script>
+
+                window.onclick = function(event) {
+                    if (!event.target.matches('#search')) {
+                        var dropdown = document.getElementById('drop_list');
+                        dropdown.classList.remove('show');
+                    }
+                };
+
+
+
+        $('#search').click(function(e){
+            e.preventDefault();
+
+            document.getElementById("drop_list").classList.add("show");
+            ul = document.getElementById('ul');
+
+            while (ul.firstChild) {
+                ul.removeChild(ul.firstChild);
+            }
+
+            const query = $('#query').val();
+            const pkg = {
+                query: query,
+                key: 'AIzaSyDdvVUAMdAUl5erpzC0vjmcElYdYXfywsw',
+                location: "45.5195739, -122.6128",
+                radius: 1000
+            };
+
+            $.ajax({
+                url: 'https://maps.googleapis.com/maps/api/place/textsearch/json',
+                data: pkg,
+                dataType: 'json',
+                success: function(data){
+
+                    for (i=0; i<data.results.length; i++) {
+                        new_item = document.createElement('li');
+                        anchor = document.createElement('a');
+                        new_item.appendChild(anchor);
+                        ul.appendChild(new_item);
+                        anchor.setAttribute('href', 'link goes here');
+                        new_item.classList.add('dropdown');
+                        anchor.innerText = data.results[i].name + data.results[i].formatted_address;
+                        console.log(data.results[i])
+                    }
+
+//                    console.log(data)
+                }
+            })
+
+        });
+    </script>
+
+    </body>
+</html>

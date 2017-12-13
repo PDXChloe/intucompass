@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <meta name="description" content="">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <header>
+            <figure class="main-logo">Intucompass</figure>
+            <nav>
+                <ul>
+                    <li>Thoughts</li>
+                    <li>Profile</li>
+                    <li>Sign In</li>
+                    <li>Join</li>
+                </ul>
+            </nav>
+
+        </header>
+        <main>
+            <div class="container">
+                <form class="main_loc_search">
+                    {% csrf_token %}
+                    <input type="text">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <ul>
+                <li>About</li>
+                <li>History</li>
+                <li>Careers</li>
+            </ul>
+        </footer>
+
+    </body>
+</html>
