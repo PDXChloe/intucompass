@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>KidFolio</title>
+        <meta name="description" content="">
+        <link rel="stylesheet" type="text/css" href='{% static "css/kidstyle.css" %}'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1> Hi welcome!</h1>
+        <h2>Here are your Kid Pics</h2>
+
+        <div>
+            {% if pictures_list %}
+            <table>
+                <tr>
+                    <th>Drawing</th>
+                    <th>Date</th>
+
+                </tr>
+
+
+            {% for pic in pictures_list %}
+            <tr>
+                <td>{{ pic.image }}</td>
+                <td>{{ pic.pub_date }}</td>
+            </tr>
+
+            {% endfor %}
+            </table>
+
+            {% else %}
+            <p>no drawings found</p>
+
+            {% endif %}
+
+
+        </div>
+    </body>
+</html>
