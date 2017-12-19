@@ -5,8 +5,20 @@
         <meta charset="UTF-8">
         <title>Title</title>
         <meta name="description" content="">
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <!--<link rel="stylesheet" type="text/css" href="style.css">-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+          /* Always set the map height explicitly to define the size of the div
+           * element that contains the map. */
+          #map {
+              height: 600px;
+              width: 600px;
+
+
+          }
+          /* Optional: Makes the sample page fill the window. */
+
+    </style>
     </head>
     <body>
         <header>
@@ -26,18 +38,111 @@
                 <form class="main_loc_search">
                     {% csrf_token %}
                     <input type="text">
-                    <button type="submit">Search</button>
+                    <button id="search" type="submit">Search</button>
                 </form>
             </div>
+            <div id="map"></div>
+            <script>
+
+              var map, infoWindow;
+              function initMap() {
+                  $('#search').click(function(e){
+                      e.preventDefault();
+
+                      const query = $('#query').val();
+                      const pkg = {
+                          query: query,
+                          key: 'AIzaSyDdvVUAMdAUl5erpzC0vjmcElYdYXfywsw',
+                          location: "45.5195739, -122.6128",
+                          radius: 1000
+                      };
+                      $.ajax({
+                          url: 'https://maps.googleapis.com/maps/api/place/textsearch/json',
+                          data: pkg,
+                          dataType: 'json',
+                          success: function (data) {
+
+                              for (i = 0; i < data.results.length; i++) {
+                                  new_item = document.createElement('li');
+                                  anchor = document.createElement('a');
+                                  new_item.appendChild(anchor);
+                                  ul.appendChild(new_item);
+                                  anchor.setAttribute('href', 'link goes here');
+//                                  ul.onclick=function() {
+//                                      var pos = {
+//                                          lat: position.coords.latitude,
+//                                          lng: position.coords.longitude
+//                                      };
+//                                      infoWindow.setPosition()
+//                                  };
+                                  new_item.classList.add('dropdown');
+                                  anchor.innerText = data.results[i].name + data.results[i].formatted_address;
+                                  console.log(data.results[i])
+                              }
+                          }
+                      })
+                  });
+
+
+
+                map = new google.maps.Map(document.getElementById('map'), {
+                  center: {lat: -34.397, lng: 150.644},
+                  zoom: 10
+                });
+                infoWindow = new google.maps.InfoWindow;
+//                finds location of user IP address.
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(function(position) {
+                    var pos = {
+                      lat: position.coords.latitude,
+                      lng: position.coords.longitude
+                    };
+
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('Here you are!');
+                    infoWindow.open(map);
+                    map.setCenter(pos);
+
+//                    adds marker to found geolocation
+                    var marker = new google.maps.Marker({
+                      position: pos,
+                      map: map,
+                      title: 'Hello World!'
+                    });
+
+//                   zooms in when the marker is clicked.....
+
+                    marker.addListener('click', function() {
+                        map.setZoom(20);
+                        map.setCenter(marker.getPosition())
+                    });
+
+
+
+                    }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                  });
+                } else {
+                  // Browser doesn't support Geolocation
+                  handleLocationError(false, infoWindow, map.getCenter());
+                }
+              }
+
+              function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                infoWindow.setPosition(pos);
+                infoWindow.setContent(browserHasGeolocation ?
+                                      'Error: The Geolocation service failed.' :
+                                      'Error: Your browser doesn\'t support geolocation.');
+                infoWindow.open(map);
+              }
+
+            </script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG8RCrC_9q0rXFQM334O78Pz_pFPsWL7E&callback=initMap"></script>
+
         </main>
 
-        <footer>
-            <ul>
-                <li>About</li>
-                <li>History</li>
-                <li>Careers</li>
-            </ul>
-        </footer>
+
 
     </body>
 </html>
