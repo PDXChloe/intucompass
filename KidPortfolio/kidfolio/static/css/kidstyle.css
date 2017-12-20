@@ -1,0 +1,27 @@
+
+body {
+    background-color: rgb(204, 255, 179);
+}
+h1{
+    color: red;
+}
+
+img {
+    height: 400px;
+    width: 400px;
+    border-radius: 20px;
+
+}
+
+.kidpic_container {
+    width: 25%;
+
+}
+
+.art_container {
+    width: 100%;
+
+
+
+}
+
