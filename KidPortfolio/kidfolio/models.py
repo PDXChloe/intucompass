@@ -11,6 +11,7 @@ class Category(models.Model):
 
 class Portfolio(models.Model):
     # images = models.
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     portfolio_name = models.CharField(max_length=34)
     def __str__(self):
         return self.portfolio_name
@@ -20,11 +21,10 @@ class KidPicPost(models.Model):
     image = models.ImageField(upload_to='images/', width_field="width_field", height_field="height_field",)
     height_field = models.IntegerField(default=400)
     width_field = models.IntegerField(default=400)
-    author = models.ForeignKey(User)
     create_date = models.DateTimeField(default=timezone.now,auto_created=True)
     title = models.CharField(max_length=34,blank=True)
     caption = models.TextField(max_length=500,blank=True)
-    portfolio = models.ForeignKey(Portfolio)
+    portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE)
     category = models.ForeignKey(Category,blank=True,null=True)
 
     def publish(self):

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from kidfolio.models import KidPicPost,Portfolio,Category
@@ -40,6 +40,23 @@ def publish_new_kidpost(request):
     # post = KidPicPost(title=title,image=image,caption=caption,author=user,portfolio=portfolio,category=category)
     # post.save()
 
+def create_portfolio(request):
+    pass
+    #not in urls yet
+
+def get_kidpost(request, kid_id):
+    # return HttpResponse('you are at the detail_view.html') #this url works
+    post = get_object_or_404(KidPicPost, pk=kid_id)
+    return render(request, 'kidfolio/detail_view.html', {'post': post})
+
+
+
+    # kidpost = KidPicPost.objects.[0] #I know this isn't right, I just want one kidpost I clicked on in the index.html
+    # return render(request, 'kidfolio/detail_view.html', {'kidpost':kidpost})
+
+def edit_kidpost(request):
+    # this not finished
+    return HttpResponse('works for me')
 
 
 
@@ -47,3 +64,17 @@ def publish_new_kidpost(request):
 # Populate the KIdPicPost with data posted
 # then save
 # then redirect
+
+
+
+def get_portfolios(request):
+    user = request.user
+    #portfolios = user.portfolio_set.all()
+    #return render(request, 'kidfolio/portfolios.html', {'portfolios': portfolios})
+    return render(request, 'kidfolio/portfolios.html')
+
+    # for portfolio in portfolios:
+    #     posts = portfolio.kidpicpost_set.all()
+
+
+# separate by portfolio

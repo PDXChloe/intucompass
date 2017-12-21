@@ -1,0 +1,55 @@
+
+
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>KidFolio Portfolio Page</title>
+        <meta name="description" content="">
+        <link rel="stylesheet" type="text/css" href='{% static "css/kidstyle.css" %}'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <h1>Welcome!</h1>
+        <h2>Here are your Portfolio's</h2>
+        <a href="{% url 'kidfolio:new_kidpost' %}">
+            <button class="make_entry">New KidPost</button>
+        </a>
+       <div>
+           {% for portfolio in user.portfolio_set.all %}
+           <h1>{{portfolio.portfolio_name}}</h1>
+
+            <h3>{{ portfolio.kidpicpost_set.first}}</h3>
+            <div>
+                {% with first_post=portfolio.kidpicpost_set.first %}
+                {% if first_post %}
+                <div class="art_container">
+                    <a href="{% url 'kidfolio:get_kidpost' first_post.id %}">
+                        <img class="edit_btn" src="{{ first_post.image.url }}"/>
+                    </a>
+                </div>
+
+                {% for post in portfolio.kidpicpost_set.all %}
+                <h3>{{post.title}}</h3>
+                {% endfor %}
+
+
+                {% endif %}
+                {% endwith %}
+            </div>
+            {% endfor %}
+        </ul>
+
+
+       </div>
+
+    </body>
+
+
+
+
+
+

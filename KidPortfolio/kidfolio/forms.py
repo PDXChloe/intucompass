@@ -1,4 +1,4 @@
-from django.forms import ModelForm, HiddenInput
+from django.forms import ModelForm
 from .models import KidPicPost
 
 # class KidpicpostForm(forms.ModelForm):
@@ -9,8 +9,6 @@ from .models import KidPicPost
 class KidPicForm(ModelForm):
     class Meta:
         model = KidPicPost
-        fields = ['image', 'title', 'caption', 'portfolio', 'category', 'author']
+        fields = ['image', 'title', 'caption', 'portfolio', 'category']
 
-        widgets = {
-            'author': HiddenInput
-        }
+
