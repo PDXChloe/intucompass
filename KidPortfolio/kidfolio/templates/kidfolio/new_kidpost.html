@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>new post</title>
+        <meta name="description" content="">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="{% url 'kidfolio:publish_new_kidpost' %}" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div class="title">
+                <h3>Art Title:</h3>
+                {{ form.title }}
+            </div>
+
+            <div class="image">
+                {{ form.image }}
+            </div>
+
+            <div class="caption">
+                <h3>Creation Notes: </h3>
+                {{ form.caption }}
+            </div>
+
+            <div class="portfolio">
+                <h3>Which Portfolio?:</h3>
+                {{ form.portfolio }}
+            </div>
+
+            <div class="category">
+                <h3>Category: </h3>
+                {{ form.category }}
+            </div>
+
+            {{form.author}}
+
+            <button type="submit">Add</button>
+
+        </form>
+
+
+    </body>
+</html>

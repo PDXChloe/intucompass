@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>KidFolio</title>
+        <title>KidFolio Portfolio Page</title>
         <meta name="description" content="">
         <link rel="stylesheet" type="text/css" href='{% static "css/kidstyle.css" %}'/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +11,16 @@
     <body>
         <h1>Hi welcome!</h1>
         <h2>Here are your Kid Pics</h2>
+        <a href="{% url 'kidfolio:new_kidpost' %}">
+            <button class="make_entry">New KidPost</button>
+        </a>
+
 
         {% for post in kidpost %}
         <div class="kidpic_container">
             <h2>{{ post.title }} by {{ post.portfolio }}</h2>
             <div class="art_container">
-                <img src="{{ post.image.url }}" />
+                <img src="{{ post.image.url }}"/>
             </div>
             <p class="caption">{{ post.caption }}</p>
         </div>

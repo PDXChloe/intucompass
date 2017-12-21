@@ -17,16 +17,15 @@ class Portfolio(models.Model):
 
 class KidPicPost(models.Model):
 
-    image = models.ImageField(upload_to='images/', null=True, blank=True, width_field="width_field", height_field="height_field",)
+    image = models.ImageField(upload_to='images/', width_field="width_field", height_field="height_field",)
     height_field = models.IntegerField(default=400)
     width_field = models.IntegerField(default=400)
     author = models.ForeignKey(User)
     create_date = models.DateTimeField(default=timezone.now,auto_created=True)
-    pub_date = models.DateField(blank=True, null=True)
     title = models.CharField(max_length=34,blank=True)
     caption = models.TextField(max_length=500,blank=True)
     portfolio = models.ForeignKey(Portfolio)
-    category = models.ManyToManyField(Category)
+    category = models.ForeignKey(Category,blank=True,null=True)
 
     def publish(self):
 
