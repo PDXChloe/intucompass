@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Portfolio Detail Page</title>
-        <meta name="description" content="">
-        <link rel="stylesheet" type="text/css" href='{% static "css/kidstyle.css" %}'/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
+{% extends "kidfolio/base.html" %}
+{% block content%}
+
         <div class="kidpic_container">
+            <a href="{% url 'kidfolio:edit_kidpost' %}"><button class="edit_btn">Edit KidPic</button></a>
             <h2>{{ post.title }} by {{ post.portfolio }}</h2>
             <div class="art_container">
 
@@ -19,5 +12,4 @@
             <p class="caption">{{ post.caption }}</p>
         </div>
 
-    </body>
-</html>
+{% endblock %}

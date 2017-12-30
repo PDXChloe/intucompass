@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>new portfolio</title>
+        <meta name="description" content="">
+        <link rel="stylesheet" type="text/css" href='{% static "css/kidstyle.css" %}'/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <form action="{% url 'kidfolio:create_portfolio' %}"  method="post">
+        {% csrf_token %}
+            <div class="title">
+                <h3>Add New Portfolio</h3>
+                {{ form.portfolio_name }}
+            </div>
+
+            <button type="submit">Add</button>
+    </form>
+
+    </body>
+</html>

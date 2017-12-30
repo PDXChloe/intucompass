@@ -1,23 +1,16 @@
 
+{% extends "kidfolio/base.html" %}
+{% block content %}
 
 
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>KidFolio Portfolio Page</title>
-        <meta name="description" content="">
-        <link rel="stylesheet" type="text/css" href='{% static "css/kidstyle.css" %}'/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
 
-    <body>
-        <div>
+
+        <div class="centerstage">
 
             <h1>Welcome!</h1>
             <h2>Here are your Portfolio's</h2>
             <a href="{% url 'kidfolio:new_kidpost' %}"><button class="make_entry">New KidPost</button></a>
+            <a href="{% url 'kidfolio:new_portfolio' %}"><button class="make_entry">Make New Portfolio</button></a>
 
            <div>
                {% for portfolio in user.portfolio_set.all %}
@@ -28,6 +21,7 @@
 
 
                {% for post in portfolio.kidpicpost_set.all %}
+        <div class="kidpic_container">
             <div class="art_container">
                 <a href="{% url 'kidfolio:get_kidpost' post.id %}">
                 <img class="edit_btn" src="{{ post.image.url }}"/>
@@ -45,12 +39,11 @@
         </div>
             {% endfor %}
 
+    </div>
 
 
 
-    </body>
-
-
+{% endblock %}
 
 
 

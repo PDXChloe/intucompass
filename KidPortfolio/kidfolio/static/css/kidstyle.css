@@ -1,25 +1,26 @@
 
 body {
-    background-color: rgb(204, 255, 179);
+    background-color: #666;
+
 }
 h1{
     color: red;
 }
 
 img {
-    height: 400px;
-    width: 400px;
+    height: auto;
+    width: 50%;
     border-radius: 20px;
 
 }
 
-.kidpic_container {
-    width: 25%;
-
+.techfont{
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
-.art_container {
-    width: 100%;
-
+.bigbrand {
+    font-size: 1.5em;
 }
 
