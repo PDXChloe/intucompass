@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>new post</title>
-        <meta name="description" content="">
-        <link rel="stylesheet" type="text/css" href='{% static "css/kidstyle.css" %}'/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <form action="{% url 'kidfolio:publish_new_kidpost' %}" enctype="multipart/form-data" method="post">
+{% extends 'kidfolio/base.html' %}
+{% block content%}
+
+
+
+
+<form class="post-form" action="{% url 'kidfolio:publish_new_kidpost' %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             <div class="title">
                 <h3>Art Title:</h3>
@@ -17,6 +12,7 @@
             </div>
 
             <div class="image">
+                <h3>Upload Image: </h3>
                 {{ form.image }}
             </div>
 
@@ -37,10 +33,13 @@
 
 
 
-            <button type="submit">Add</button>
+            <button type="submit" class="save btn btn-default">Add</button>
 
         </form>
 
+        <script>
+            var editor = new MediumEditor('.editable');
+        </script>
 
-    </body>
-</html>
+
+{% endblock %}
