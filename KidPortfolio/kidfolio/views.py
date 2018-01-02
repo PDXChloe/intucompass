@@ -70,7 +70,7 @@ def new_user(request):
     if request.method == 'POST':
         user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
         login(request, user)
-        return HttpResponseRedirect(reverse('kidfolio:portfolios'))
+        return HttpResponseRedirect(reverse('kidfolio:get_portfolios'))
 
 def login_user(request):
     if request.method == 'POST':
@@ -89,14 +89,14 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('kidfolio:index'))
 
 def get_portfolios(request):
-    user = request.user
+    # user = request.user
     #portfolios = user.portfolio_set.all()
     #return render(request, 'kidfolio/portfolios.html', {'portfolios': portfolios})
     return render(request, 'kidfolio/portfolios.html')
 
 def get_this_portfolio(request, portfolio_id):
-    post = get_object_or_404(Portfolio, pk=portfolio_id)
-    return render(request, 'kidfolio/portfolio_detail.html', {'post': post})
+    portfolio = get_object_or_404(Portfolio, pk=portfolio_id)
+    return render(request, 'kidfolio/portfolio_detail.html', {'portfolio': portfolio})
 
     # want to get all the posts from this particular portfolio and list all portfolio posts in portfolio_detail.html
 
