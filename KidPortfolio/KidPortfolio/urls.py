@@ -22,11 +22,11 @@ from django.conf import settings
 from django.contrib.auth import views
 
 urlpatterns = [
-    url(r'',include('kidfolio.urls')),
 
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/login/$', views.login,name='login'),
     url(r'^accounts/logout/$', views.logout,name='logout',kwargs={'next_page': '/'}),
+    url(r'',include('kidfolio.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()
 

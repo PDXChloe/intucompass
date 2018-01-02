@@ -3,13 +3,12 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from kidfolio.models import KidPicPost,Portfolio,Category
 from .forms import KidPicForm, PortfolioForm
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 
 
 def index(request):
-    kidpost = KidPicPost.objects.all()
-    posts = {"kidpost": kidpost}
-    print(posts)
-    return render(request, 'kidfolio/index.html', context=posts)
+    return render(request, 'kidfolio/about.html')
 
 # def receive_kidpost(request):
 #     my_image = request.FILES['my_image']
@@ -45,18 +44,14 @@ def new_portfolio(request):
     return render(request, 'kidfolio/new_portfolio.html', {'form':form})
 
 
-def create_portfolio(request, pk):
-    post = get_object_or_404(User, pk=pk)
+def create_portfolio(request):
     if request.method == "POST":
         form = PortfolioForm(request.POST)
         if form.is_valid():
-            new_portfolio = form.save()
-            new_portfolio.post = post
-            new_portfolio.save()
-            return HttpResponseRedirect(reverse('kidfolio:index', pk=post.pk))
-    else:
-        form = PortfolioForm()
-        return HttpResponseRedirect(reverse('kidfolio:new_portfolio', {'form' : form}))
+            form.save()
+            return HttpResponseRedirect(reverse('kidfolio:get_portfolios'))
+        else:
+            return HttpResponseRedirect(reverse('kidfolio:new_portfolio'))
 
 
 def get_kidpost(request, kid_id):
@@ -71,13 +66,40 @@ def edit_kidpost(request):
     return HttpResponse('works for me')
 
 
+def new_user(request):
+    if request.method == 'POST':
+        user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+        login(request, user)
+        return HttpResponseRedirect(reverse('kidfolio:portfolios'))
 
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse('kidfolio:get_portfolios'))
+        else:
+            pass
+            return HttpResponseRedirect(reverse('kidfolio:index'))
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('kidfolio:index'))
 
 def get_portfolios(request):
     user = request.user
     #portfolios = user.portfolio_set.all()
     #return render(request, 'kidfolio/portfolios.html', {'portfolios': portfolios})
     return render(request, 'kidfolio/portfolios.html')
+
+def get_this_portfolio(request, portfolio_id):
+    post = get_object_or_404(Portfolio, pk=portfolio_id)
+    return render(request, 'kidfolio/portfolio_detail.html', {'post': post})
+
+    # want to get all the posts from this particular portfolio and list all portfolio posts in portfolio_detail.html
+
 
     # for portfolio in portfolios:
     #     posts = portfolio.kidpicpost_set.all()

@@ -4,35 +4,30 @@
 
 
 
-
-        <div class="centerstage">
-
             <h1>Welcome!</h1>
             <h2>Here are your Portfolio's</h2>
             <a href="{% url 'kidfolio:new_kidpost' %}"><button class="make_entry">New KidPost</button></a>
             <a href="{% url 'kidfolio:new_portfolio' %}"><button class="make_entry">Make New Portfolio</button></a>
-
-           <div>
+            <div>
                {% for portfolio in user.portfolio_set.all %}
-               <h1>{{portfolio.portfolio_name}}</h1>
+               <a href="{% url 'kidfolio:get_this_portfolio' portfolio.id %}"><h1>{{portfolio.portfolio_name}}</h1></a>
 
            </div>
 
 
 
+
                {% for post in portfolio.kidpicpost_set.all %}
-        <div class="kidpic_container">
-            <div class="art_container">
-                <h3>{{post.title}}</h3>
-                <a href="{% url 'kidfolio:get_kidpost' post.id %}">
-                <img class="edit_btn" src="{{ post.image.url }}"/>
-                </a>
-            </div>
-
-            <div>
-
-                <p>{{post.caption}}</p>
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col">
+                    <h3>{{post.title}}</h3>
+                    <a href="{% url 'kidfolio:get_kidpost' post.id %}">
+                    <img class="edit_btn" src="{{ post.image.url }}"/>
+                    </a>
+                    <p>{{post.caption}}</p>
                {% endfor %}
+                </div>
 
             </div>
 
@@ -40,7 +35,7 @@
         </div>
             {% endfor %}
 
-    </div>
+
 
 
 

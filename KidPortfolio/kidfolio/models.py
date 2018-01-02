@@ -32,6 +32,7 @@ class KidPicPost(models.Model):
         self.pub_date = timezone.now()
         self.save()
 
+
     def __str__(self):
         return self.title
 
