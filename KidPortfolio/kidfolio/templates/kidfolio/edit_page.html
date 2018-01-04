@@ -2,13 +2,13 @@
 {% block content%}
 
         <div class="kidpic_container">
-            <h2>{{ kidpost.title }} by {{ kidpost.portfolio }}</h2>
+            <h2>{{ form.title }} by {{ form.portfolio }}</h2>
             <div class="art_container">
 
                     <img class="edit_btn" src="{{ kidpost.image.url }}"/>
 
             </div>
-            <p class="caption">{{ kidpost.caption }}</p>
+            <p class="caption">{{ post.caption }}</p>
         </div>
 
 

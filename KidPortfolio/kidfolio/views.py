@@ -25,7 +25,7 @@ def publish_new_kidpost(request):
     form = KidPicForm(request.POST, request.FILES)
     if form.is_valid():
         form.save()
-        return HttpResponseRedirect(reverse('kidfolio:index'))
+        return HttpResponseRedirect(reverse('kidfolio:get_portfolios'))
     else:
         return HttpResponseRedirect(reverse('kidfolio:new_kidpost'))
     # title = request.POST['title']
@@ -61,10 +61,9 @@ def get_kidpost(request, kid_id):
 
 
 
-def edit_kidpost(request):
+def edit_kidpost(request, kid_id):
     # this not finished
-    return HttpResponse('works for me')
-
+    pass
 
 def new_user(request):
     if request.method == 'POST':

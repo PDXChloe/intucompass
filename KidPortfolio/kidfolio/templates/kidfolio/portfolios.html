@@ -2,28 +2,38 @@
 {% extends "kidfolio/base.html" %}
 {% block content %}
 
-    <h1>Welcome!</h1>
-    <h2>Here are your Portfolio's</h2>
-    <a href="{% url 'kidfolio:new_kidpost' %}"><button class="make_entry">New KidPost</button></a>
-    <a href="{% url 'kidfolio:new_portfolio' %}"><button class="make_entry">Make New Portfolio</button></a>
+
+    <h1>Your Portfolio's:</h1>
+
     <div>
         {% for portfolio in user.portfolio_set.all %}
             <a href="{% url 'kidfolio:get_this_portfolio' portfolio.id %}"><h1>{{portfolio.portfolio_name}}</h1></a>
 
+        <div class="grid-box">
             {% for post in portfolio.kidpicpost_set.all %}
-                <div class="container">
-                    <div class="row no-gutters">
-                        <div class="col">
-                            <h3>{{post.title}}</h3>
-                            <a href="{% url 'kidfolio:get_kidpost' post.id %}">
-                            <img class="edit_btn" src="{{ post.image.url }}"/>
-                            </a>
-                            <p>{{post.caption}}</p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
 
+                    <div class="small_pic_box" id="small_pic_box">
+                        <a href="{% url 'kidfolio:get_kidpost' post.id %}">
+                        <img class="kidpic pic" src="{{ post.image.url }}"/>
+
+
+                            <div id="inner-box">
+
+                                <p>{{ post.caption }}</p>
+
+                            </div>
+                        </a>
+                    </div>
+
+
+
+
+
+
+            {% endfor %}
+        </div>
+        <a href="{% url 'kidfolio:new_kidpost' %}"><button class="make_entry">New KidPost</button></a>
+        <a href="{% url 'kidfolio:new_portfolio' %}"><button class="make_entry">Make New Portfolio</button></a>
         {% endfor %}
     </div>
 

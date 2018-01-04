@@ -2,11 +2,11 @@
 {% block content%}
 
         <div class="kidpic_container">
-            <a href="{% url 'kidfolio:edit_kidpost' %}"><button class="edit_btn">Edit KidPic</button></a>
+            <a href="{% url 'kidfolio:edit_kidpost' post.id %}"><button class="edit_btn">Edit KidPic</button></a>
             <h2>{{ post.title }} by {{ post.portfolio }}</h2>
             <div class="art_container">
 
-                    <img class="edit_btn" src="{{ post.image.url }}"/>
+                    <img class="detail_pic pic" src="{{ post.image.url }}"/>
 
             </div>
             <p class="caption">{{ post.caption }}</p>
