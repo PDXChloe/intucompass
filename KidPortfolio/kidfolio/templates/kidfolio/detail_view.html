@@ -1,15 +1,28 @@
 {% extends "kidfolio/base.html" %}
 {% block content%}
 
-        <div class="kidpic_container">
-            <a href="{% url 'kidfolio:edit_kidpost' post.id %}"><button class="edit_btn">Edit KidPic</button></a>
-            <h2>{{ post.title }} by {{ post.portfolio }}</h2>
-            <div class="art_container">
+        <!--<div class="kidpic_container">-->
+            <!--<a href="{% url 'kidfolio:edit_kidpost' post.id %}"><button class="edit_btn">Edit KidPic</button></a>-->
+            <!--<h2>{{ post.title }} by {{ post.portfolio }}</h2>-->
+            <!--<div class="art_container">-->
 
-                    <img class="detail_pic pic" src="{{ post.image.url }}"/>
+                    <!--<img class="detail_pic pic" src="{{ post.image.url }}"/>-->
 
-            </div>
-            <p class="caption">{{ post.caption }}</p>
+            <!--</div>-->
+            <!--<p class="caption">{{ post.caption }}</p>-->
+        <!--</div>-->
+
+    <div class="small_pic_box">
+        <div class="card-header">
+            <h3 class="cap_title">{% autoescape off %} {{post.title}} {% endautoescape %}</h3>
         </div>
+        <img class="detail_pic pic" src="{{ post.image.url }}" alt="Card image cap">
+
+        <div class="card-body inner-box">
+
+          <p class="text">{% autoescape off %} {{post.caption}} {% endautoescape %}</p>
+          <a href="{% url 'kidfolio:edit_kidpost' post.id %}" class="btn edit_btn">Edit</a>
+        </div>
+    </div>
 
 {% endblock %}

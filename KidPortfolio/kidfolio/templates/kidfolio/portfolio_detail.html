@@ -1,21 +1,36 @@
 {% extends "kidfolio/base.html" %}
 {% block content %}
 
-<h1>{{portfolio.portfolio_name}}</h1>
+<h1>{% autoescape off %} {{portfolio.portfolio_name}} {% endautoescape %}</h1>
 
 {% for post in portfolio.kidpicpost_set.all %}
 
-    <div class="container">
-        <div class="row no-gutters">
-            <div class="col">
-                <h3>{{post.title}}</h3>
-                <a href="{% url 'kidfolio:get_kidpost' post.id %}">
-                <img class="portfolio_detail_pic pic" src="{{ post.image.url }}"/>
-                </a>
-                <p>{{post.caption}}</p>
-            </div>
+    <!--<div class="container">-->
+        <!--<div class="row no-gutters">-->
+            <!--<div class="col">-->
+                <!--<h3>{{post.title}}</h3>-->
+                <!--<a href="{% url 'kidfolio:get_kidpost' post.id %}">-->
+                <!--<img class="portfolio_detail_pic pic" src="{{ post.image.url }}"/>-->
+                <!--</a>-->
+                <!--<p>{{post.caption}}</p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="card" style="width: 40em;">
+        <div class="card-header">
+            <h3 class="cap_title">{% autoescape off %} {{post.title}} {% endautoescape %}</h3>
+        </div>
+        <img class="card-img-top portfolio_detail_pic pic" src="{{ post.image.url }}" alt="Card image cap">
+
+        <div class="card-body">
+
+          <p class="card-text">{% autoescape off %} {{post.caption}} {% endautoescape %}</p>
+          <a href="{% url 'kidfolio:edit_kidpost' post.id %}" class="btn edit_btn">Edit</a>
         </div>
     </div>
+
+
 {% endfor %}
 
 

@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>KidFolio</title>
 
         <link rel="stylesheet" href ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href='{% static "css/kidstyle.css" %}'/>
@@ -13,47 +13,53 @@
     </head>
     <body>
 
-    <nav class="navbar navbar-default techfont custom-navbar">
-        <div class="container">
-            <ul class="nav navbar-nav">
-                <li><a class="navbar-brand bigbrand" href="{% url 'kidfolio:index' %}">KidFolio</a></li>
+
+            <nav class="navbar navbar-default techfont custom-navbar">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-brand bigbrand" href="{% url 'kidfolio:index' %}">KidFolio</a></li>
 
 
-            </ul>
+                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'kidfolio:get_portfolios' %}">Your Portfolios</a>
-                </li>
-
-                <li>
-                    <a href="{% url 'kidfolio:new_kidpost' %}">New Kidpost</a>
-                </li>
-                <li>
-                    <a>Welcome: {{ user.username }}</a>
-                </li>
-                <li>
-                    <a href="{% url 'kidfolio:user_logout' %}">Logout</a>
-                </li>
-                {% else %}
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
                     <li>
-                        <a class='nav navbar-right' href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span></a>
-
+                        <a href="{% url 'kidfolio:get_portfolios' %}">Your Portfolios</a>
                     </li>
-                {% endif%}
-            </ul>
+
+                    <li>
+                        <a href="{% url 'kidfolio:new_kidpost' %}">New Kidpost</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'kidfolio:new_portfolio' %}">New Portfolio</a>
+                    </li>
+                    <li>
+                        <a>Welcome: {{ user.username }}</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'kidfolio:user_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                        <li>
+                            <a class='nav navbar-right' href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span></a>
+
+                        </li>
+                    {% endif%}
+                </ul>
+
+
+
+        </nav>
+
+<div class="container main-content">
+
+       {% block content %}
+       {% endblock%}
+</div>
 
         </div>
 
-    </nav>
 
-   <div class="content container">
-       <div class="row">
-           <!--Put grid stuff here from Bootstrap-->
-           {% block content %}
-           {% endblock%}
-       </div>
-   </div>
     </body>
 </html>

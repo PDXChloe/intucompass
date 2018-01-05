@@ -3,37 +3,36 @@
 {% block content %}
 
 
-    <h1>Your Portfolio's:</h1>
 
     <div>
         {% for portfolio in user.portfolio_set.all %}
-            <a href="{% url 'kidfolio:get_this_portfolio' portfolio.id %}"><h1>{{portfolio.portfolio_name}}</h1></a>
+        <a href="{% url 'kidfolio:get_this_portfolio' portfolio.id %}"><h1>{{portfolio.portfolio_name}}</h1></a>
 
         <div class="grid-box">
-            {% for post in portfolio.kidpicpost_set.all %}
-
-                    <div class="small_pic_box" id="small_pic_box">
-                        <a href="{% url 'kidfolio:get_kidpost' post.id %}">
+            {% for post in portfolio.kidpicpost_set.all reversed %}
+            {% if forloop.counter <= 4 %}
+                <div class="small_pic_box" id="small_pic_box">
+                    <a href="{% url 'kidfolio:get_kidpost' post.id %}">
+                    <div class="overlay-box">
                         <img class="kidpic pic" src="{{ post.image.url }}"/>
 
+                        <div id="inner-box">
 
-                            <div id="inner-box">
+                            <p>{% autoescape off %} {{ post.caption }} {% endautoescape %}</p>
+                            <figure class="pencil">
+                                <a href="{% url 'kidfolio:edit_kidpost' post.id %}"><span class="glyphicon glyphicon-pencil" id="pencil"></span></a>
+                            </figure>
+                        </div>
 
-                                <p>{{ post.caption }}</p>
-
-                            </div>
-                        </a>
                     </div>
 
-
-
-
-
-
+                    </a>
+                </div>
+            {% endif %}
             {% endfor %}
         </div>
-        <a href="{% url 'kidfolio:new_kidpost' %}"><button class="make_entry">New KidPost</button></a>
-        <a href="{% url 'kidfolio:new_portfolio' %}"><button class="make_entry">Make New Portfolio</button></a>
+        <!--<a href="{% url 'kidfolio:new_kidpost' %}"><button class="make_entry">New KidPost</button></a>-->
+        <!--<a href="{% url 'kidfolio:new_portfolio' %}"><button class="make_entry">Make New Portfolio</button></a>-->
         {% endfor %}
     </div>
 
