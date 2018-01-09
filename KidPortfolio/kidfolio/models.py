@@ -37,6 +37,9 @@ class KidPicPost(models.Model):
         return self.title
 
 
-
-
+    # def remove_pic(self):
+    #     self.image = delete()
+    #     self.save()
+    #
+    #
 

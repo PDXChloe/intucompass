@@ -48,7 +48,19 @@
 
     </body>
 
+<!--portfolio_detail page old info-->
+<div class="card" style="width: 40em;">
+        <div class="card-header">
+            <h3 class="cap_title">{% autoescape off %} {{post.title}} {% endautoescape %}</h3>
+        </div>
+        <a href="{% url 'kidfolio:get_kidpost' post.id %}">
+            <img class="card-img-top portfolio_detail_pic pic" src="{{ post.image.url }}" alt="Card image cap">
+        </a>
+        <div class="card-body">
 
+          <p class="card-text">{% autoescape off %} {{post.caption}} {% endautoescape %}</p>
+        </div>
+    </div>
 
 
 

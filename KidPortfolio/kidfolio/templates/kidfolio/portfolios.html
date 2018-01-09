@@ -1,6 +1,7 @@
 
 {% extends "kidfolio/base.html" %}
 {% block content %}
+{% load front_tags %}
 
 
 
@@ -12,7 +13,7 @@
             {% for post in portfolio.kidpicpost_set.all reversed %}
             {% if forloop.counter <= 4 %}
                 <div class="small_pic_box" id="small_pic_box">
-                    <a href="{% url 'kidfolio:get_kidpost' post.id %}">
+
                     <div class="overlay-box">
                         <img class="kidpic pic" src="{{ post.image.url }}"/>
 
@@ -20,13 +21,13 @@
 
                             <p>{% autoescape off %} {{ post.caption }} {% endautoescape %}</p>
                             <figure class="pencil">
-                                <a href="{% url 'kidfolio:edit_kidpost' post.id %}"><span class="glyphicon glyphicon-pencil" id="pencil"></span></a>
+                                <a href="{% url 'kidfolio:get_kidpost' post.id %}"><span class="glyphicon glyphicon-pencil" id="pencil"></span></a>
                             </figure>
                         </div>
 
                     </div>
 
-                    </a>
+
                 </div>
             {% endif %}
             {% endfor %}

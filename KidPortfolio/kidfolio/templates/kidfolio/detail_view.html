@@ -1,28 +1,28 @@
 {% extends "kidfolio/base.html" %}
 {% block content%}
 
-        <!--<div class="kidpic_container">-->
-            <!--<a href="{% url 'kidfolio:edit_kidpost' post.id %}"><button class="edit_btn">Edit KidPic</button></a>-->
-            <!--<h2>{{ post.title }} by {{ post.portfolio }}</h2>-->
-            <!--<div class="art_container">-->
 
-                    <!--<img class="detail_pic pic" src="{{ post.image.url }}"/>-->
+    <div class="detail_view w3-center">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h3>
+                <input type="text" class="title-text" name="title"
+                       value="{{post.title}}" />
+            </h3>
+                <img class="detail_pic pic" src="{{ post.image.url }}" alt="Card image cap">
 
-            <!--</div>-->
-            <!--<p class="caption">{{ post.caption }}</p>-->
-        <!--</div>-->
 
-    <div class="small_pic_box">
-        <div class="card-header">
-            <h3 class="cap_title">{% autoescape off %} {{post.title}} {% endautoescape %}</h3>
-        </div>
-        <img class="detail_pic pic" src="{{ post.image.url }}" alt="Card image cap">
+            <p>
+                <input type="text" class="caption-text" name="caption"
+                    value = "{{post.caption}}" />
 
-        <div class="card-body inner-box">
+            </p>
 
-          <p class="text">{% autoescape off %} {{post.caption}} {% endautoescape %}</p>
-          <a href="{% url 'kidfolio:edit_kidpost' post.id %}" class="btn edit_btn">Edit</a>
-        </div>
+            <button type="submit" class="save btn btn-default">save</button>
+        </form>
     </div>
+
+
+
 
 {% endblock %}

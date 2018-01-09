@@ -4,9 +4,8 @@ body {
     rgba(0,0,0, 0.8),
     rgba(242, 242, 242, 0.8));
     max-width: 1600px;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     min-height: 100vh;
-
 
 }
 
@@ -27,8 +26,31 @@ h1{
 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 10px;
+    grid-column-gap: 5px;
     grid-row-gap: 20px;
+
+}
+
+.thumbnail-grid {
+    width: 1200px;
+    height: auto;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 150px 150px 150px 150px 150px 150px ;
+    grid-template-rows: 150px 150px 150px 150px;
+    grid-gap: 30px;
+}
+
+.thumbnail-pic {
+    width: 150px;
+    height: 150px;
+    border: 5px solid rgba(204, 204, 204, .5);
+    box-shadow: 0 4px 8px rgba(0,0,0,.85)
+
+}
+
+.thumbnail-pic:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,.85)
 
 }
 
@@ -57,13 +79,17 @@ h1{
   transition: opacity 1s;
 }
 
-#inner-box p {
+#inner-box p{
   padding: 20px;
   color: #1a1a1a;
   font-size: 18px;
   text-align: center;
   font-weight: 600;
 
+}
+
+#inner-box h3{
+    text-align: center;
 }
 
 .pencil span {
@@ -78,31 +104,78 @@ h1{
 #small_pic_box:hover #inner-box {
   opacity:1;
   transition: opacity 2s;
+
 }
 
-.kidpic {
 
+.kidpic {
     width: 100%;
     border-radius: 10px;
 
 }
 
+.kidpic:hover #inner-box{
+    box-shadow: 0 8px 16px rgba(0,0,0,.85);
+}
+.detail_view {
+
+}
+
 .detail_pic {
-
+    border: 30px solid rgba(204, 204, 204, .5);
     height: auto;
-    width: 75%;
-    margin: 0 auto;
+    width: 65%;
+    box-shadow: 0 4px 8px rgba(0,0,0,.85);
 
 }
 
-.card {
+input.caption-text {
+    width: 65%;
+    padding: 10px;
+    margin-top: 15px;
+    border: 3px solid rgba(204, 204, 204, .5);
+    transition: ease-in, 1s;
+}
+
+input.title-text {
+    width: 65%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 3px solid rgba(204, 204, 204, .5);
+    transition: ease-in, 1s;
+}
+input.title-text:focus {
+    padding: 20px;
+    background: linear-gradient(to right bottom,
+    rgba(0,0,0, 0.8),
+    rgba(242, 242, 242, 0.8));
+    color: rgba(255, 255, 102, .85);
+}
+
+input.caption-text:focus {
+    padding: 20px;
+    background: linear-gradient(to right bottom,
+    rgba(0,0,0, 0.8),
+    rgba(242, 242, 242, 0.8));
+    color: rgba(255, 255, 102, .85);
 
 }
+.save {
+    margin: 5px 0 50px 0;
+    padding: 5px 20px;
+    transition: ease-in .5s;
+}
+
+.save:hover {
+    padding: 10px 40px;
+
+
+}
+
 
 .portfolio_detail_pic {
-    height: auto;
-    width: 75%;
-    margin: auto;
+    border: 50px solid rgba(204, 204, 204, .5);
+    box-shadow: 0 4px 8px rgba(0,0,0,.85);
 }
 
 .small_pic_box {
@@ -118,5 +191,9 @@ h1{
 
 .bigbrand {
     font-size: 3em;
+}
+
+.slideshow {
+    padding-top: 50px;
 }
 

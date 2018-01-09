@@ -13,8 +13,8 @@ class KidPicForm(forms.ModelForm):
         fields = ['image', 'title', 'caption', 'portfolio', 'category']
 
         widgets = {
-            'title':forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent'}),
-            'caption':forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent'})
+            # 'title':forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent'}),
+            # 'caption':forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent'})
         }
 
 
@@ -26,7 +26,7 @@ class PortfolioForm(forms.ModelForm):
         fields = ['portfolio_name', 'author']
 
         widgets = {
-            'portfolio_name':forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent'}),
+            # 'portfolio_name':forms.Textarea(attrs={'class':'editable medium-editor-textarea postcontent'}),
             'author': forms.HiddenInput()
         }
 

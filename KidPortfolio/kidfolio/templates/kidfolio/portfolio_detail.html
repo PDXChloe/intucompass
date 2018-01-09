@@ -1,37 +1,75 @@
 {% extends "kidfolio/base.html" %}
 {% block content %}
+<!--<div>-->
+    <!--<button class="w3-button">Thumbnail</button>-->
+<!--</div>-->
 
-<h1>{% autoescape off %} {{portfolio.portfolio_name}} {% endautoescape %}</h1>
+<div class="container slideshow">
+    <h1 class="w3-center">{{portfolio.portfolio_name}}</h1>
+    <button class="w3-button w3-white w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+    <button class="w3-button w3-white w3-display-right" onclick="plusDivs(1)">&#10095;</button>
 
-{% for post in portfolio.kidpicpost_set.all %}
+    <div class="w3-content w3-display-container">
 
-    <!--<div class="container">-->
-        <!--<div class="row no-gutters">-->
-            <!--<div class="col">-->
-                <!--<h3>{{post.title}}</h3>-->
-                <!--<a href="{% url 'kidfolio:get_kidpost' post.id %}">-->
-                <!--<img class="portfolio_detail_pic pic" src="{{ post.image.url }}"/>-->
-                <!--</a>-->
-                <!--<p>{{post.caption}}</p>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    {% for post in portfolio.kidpicpost_set.all %}
+            <div class="mySlides overlay-box">
+                <img class="portfolio_detail_pic" src="{{ post.image.url }}" style="width:100%">
+                <div id="inner-box">
+                    <h3 class="w3-center">{{ post.title }}</h3>
+                    <p class="w3-center">{{ post.caption }}</p>
+                    <figure class="pencil">
+                        <a href="{% url 'kidfolio:get_kidpost' post.id %}"><span class="glyphicon glyphicon-pencil" id="pencil"></span></a>
+                    </figure>
+                </div>
+            </div>
+    {% endfor %}
 
-    <div class="card" style="width: 40em;">
-        <div class="card-header">
-            <h3 class="cap_title">{% autoescape off %} {{post.title}} {% endautoescape %}</h3>
-        </div>
-        <img class="card-img-top portfolio_detail_pic pic" src="{{ post.image.url }}" alt="Card image cap">
-
-        <div class="card-body">
-
-          <p class="card-text">{% autoescape off %} {{post.caption}} {% endautoescape %}</p>
-          <a href="{% url 'kidfolio:edit_kidpost' post.id %}" class="btn edit_btn">Edit</a>
-        </div>
     </div>
 
+</div>
 
-{% endfor %}
+<div class="thumbnail-view" id="thumbnail-view">
+    <div class="w3-content w3-display-container">
+
+        <div class="thumbnail-grid">
+            {% for post in portfolio.kidpicpost_set.all %}
+            <a href="{% url 'kidfolio:get_kidpost' post.id %}">
+            <img class="thumbnail-pic" src="{{ post.image.url }}">
+            </a>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+</script>
+
+
+
+
 
 
 

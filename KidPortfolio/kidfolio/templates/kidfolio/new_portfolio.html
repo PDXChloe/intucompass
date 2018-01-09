@@ -1,6 +1,6 @@
 {% extends "kidfolio/base.html" %}
 {% block content%}
-<div class="jumbotron">
+<div class="jumbotron w3-center">
     <form action="{% url 'kidfolio:create_portfolio' %}"  method="post">
         {% csrf_token %}
             <div class="title">
